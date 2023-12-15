@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1087296119738",
+    "project_id": "sharpapp-c6fc4",
+    "storage_bucket": "sharpapp-c6fc4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087296119738:android:6162d202b75f20ba8f7383",
+        "android_client_info": {
+          "package_name": "com.example.thesharpexperience"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8J062WjBHLI7zrZuNQpLLdG6pWJwmu18"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
