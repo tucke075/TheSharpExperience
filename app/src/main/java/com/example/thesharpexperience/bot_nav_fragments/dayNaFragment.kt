@@ -1,4 +1,4 @@
-package com.example.thesharpexperience.fragments
+package com.example.thesharpexperience.bot_nav_fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
