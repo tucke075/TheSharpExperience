@@ -13,10 +13,10 @@
         android:layout_marginTop="76dp"
         android:ems="10"
         android:hint="Email"
-        android:inputType="text"
+        android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
@@ -38,30 +38,29 @@
         android:id="@+id/repassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
         android:ems="10"
         android:hint="Confirm password"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/signup"
+        app:layout_constraintBottom_toTopOf="@+id/TV_indicate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="340dp"
+        android:layout_marginBottom="216dp"
         android:text="Signup"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.462"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/name"
         android:layout_width="208dp"
         android:layout_height="46dp"
-        android:layout_marginBottom="12dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="text"
@@ -69,6 +68,60 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/TV_indicate"
+        android:layout_width="397dp"
+        android:layout_height="49dp"
+        android:text="Please indicated whether you a RN or NA for either Days or Nights"
+        app:layout_constraintBottom_toTopOf="@id/CBDays"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="282dp" />
+
+    <CheckBox
+        android:id="@+id/CBDays"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:text="Days"
+
+        app:layout_constraintBottom_toTopOf="@+id/CBNights"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/CBNights"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:text="Nights"
+        app:layout_constraintBottom_toTopOf="@id/signup"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="380dp" />
+
+    <CheckBox
+        android:id="@+id/CB_RN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="52dp"
+        android:text="Registered Nurse"
+        app:layout_constraintBottom_toTopOf="@+id/CB_NA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.426"
+        app:layout_constraintStart_toEndOf="@+id/CBDays" />
+
+    <CheckBox
+        android:id="@+id/CB_NA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nursing Assistant"
+        app:layout_constraintBottom_toTopOf="@id/signup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.133"
+        app:layout_constraintStart_toEndOf="@+id/CBNights"
+        tools:layout_editor_absoluteY="380dp" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
