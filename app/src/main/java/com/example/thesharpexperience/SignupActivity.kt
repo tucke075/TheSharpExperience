@@ -8,11 +8,10 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
-import com.example.thesharpexperience.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import org.w3c.dom.Text
+
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
