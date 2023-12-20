@@ -87,7 +87,7 @@ class SignupActivity : AppCompatActivity() {
 
             val emptyCheck = checkVals(pair1, pair2, password, confirmpassword, email, name)
 
-            if(emptyCheck == false)
+            if(!emptyCheck)
                 Toast.makeText(this, "Cannot have empty fields", Toast.LENGTH_SHORT).show()
             else if(password != confirmpassword)
                 Toast.makeText(this, "Password do not match", Toast.LENGTH_SHORT).show()
@@ -101,13 +101,13 @@ class SignupActivity : AppCompatActivity() {
                                 //check for which boxes are checked to be stored in firebase
                                 // store signup values into firebase firestore and make an account associated
                                 if(dayCheck.isChecked && RNCheck.isChecked)
-                                    addToFirebase(email,name, 1,1)
+                                    addToFirebaseDays(email,name, 1,1)
                                 else if(dayCheck.isChecked && NACheck.isChecked)
-                                    addToFirebase(email,name, 1,0)
+                                    addToFirebaseDays(email,name, 1,0)
                                 else if(nightCheck.isChecked && RNCheck.isChecked)
-                                    addToFirebase(email,name, 0,1)
+                                    addToFirebaseNights(email,name, 0,1)
                                 else if(nightCheck.isChecked && NACheck.isChecked)
-                                    addToFirebase(email,name, 0,0)
+                                    addToFirebaseNights(email,name, 0,0)
                                 startActivity(Intent(applicationContext, FragDisplayActivity::class.java))
                             } else { //case where email already exist
                                 Toast.makeText(this, "Not created", Toast.LENGTH_SHORT).show()
@@ -128,14 +128,32 @@ class SignupActivity : AppCompatActivity() {
         else
             return true
     }
-    private fun addToFirebase(email : String,name : String, shiftType : Int, nurseType: Int) {
+    private fun addToFirebaseDays(email : String,name : String, shiftType : Int, nurseType: Int) {
         val db = FirebaseFirestore.getInstance()
         val user: MutableMap<String, Any> = HashMap()
         user["email"] = email
         user["name"] = name
         user["shiftType"] = shiftType
         user["nurseType"] = nurseType
-        db.collection("users")
+        db.collection("Days")
+            .add(user)
+            .addOnSuccessListener {
+                Log.d("Firebase saved ", "$user")
+            }
+            .addOnFailureListener {
+                Log.d("Firebase failed ", "$user")
+            }
+    }
+    private fun addToFirebaseNights(email : String,name : String, shiftType : Int, nurseType: Int)
+    {
+        val db = FirebaseFirestore.getInstance()
+        val user: MutableMap<String, Any> = HashMap()
+        user["email"] = email
+        user["name"] = name
+        user["shiftType"] = shiftType
+        user["nurseType"] = nurseType
+        user["title"] = title
+        db.collection("Nights")
             .add(user)
             .addOnSuccessListener {
                 Log.d("Firebase saved ", "$user")
