@@ -12,6 +12,7 @@ import com.example.thesharpexperience.R
 import com.example.thesharpexperience.R.*
 import com.example.thesharpexperience.RecyclerView.DaysAdapter
 import com.example.thesharpexperience.person_data.days_person
+import com.google.android.play.core.integrity.e
 import com.google.firebase.firestore.FirebaseFirestore
 
 // TODO: Rename parameter arguments, choose names that match
@@ -59,30 +60,37 @@ class dayRnFragment : Fragment() {
             .get()
             .addOnCompleteListener {
                 val result: StringBuffer = StringBuffer()
-                if (it.isSuccessful) {
-                    try {
-                        for (document in it.result!!) {
-                            val name: String = document.data["name"].toString()
-                            val title: Int = document.data["nurseType"]?.toString()?.toIntOrNull() ?: -1
+                if (isAdded) {
+                    if (it.isSuccessful) {
+                        //try {
+                            for (document in it.result!!) {
+                                val name: String = document.data["name"].toString()
+                                val title: Int =
+                                    document.data["nurseType"]?.toString()?.toIntOrNull() ?: -1
 
-                            val item = days_person(name, title, "00-00-0000")
-                            dayList.add(item)
+                                val item = days_person(name, title, "00-00-0000")
+                                dayList.add(item)
 
+                            }
+                            daysRV.layoutManager = LinearLayoutManager(requireContext())
+                            daysRV.adapter = DaysAdapter(dayList)
+                        //} catch (e: Exception) {
+                            // Handle any exceptions (like parsing errors)
+                            //.e(
+                                //"dayRnFragment", "Error parsing document.", e
+                            //)
+                        //}
+                    } else {
+                        it.exception?.let {
+                            Log.e("dayRnFragment", "Error getting documents: ", it)
                         }
-                        daysRV.layoutManager = LinearLayoutManager(requireContext())
-                        daysRV.adapter = DaysAdapter(dayList)
-                    } catch (e: Exception) {
-                        // Handle any exceptions (like parsing errors)
-                        Log.e("dayRnFragment", "Error parsing document", e)
-                    }
-                } else {
-                    it.exception?.let {
-                        Log.e("dayRnFragment", "Error getting documents: ", it)
-                    }
 
+                    }
                 }
             }
+
     }
+
 
     companion object {
         /**
