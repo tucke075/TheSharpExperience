@@ -31,8 +31,8 @@ class DaysAdapter (private val dataList: List<days_person>) : RecyclerView.Adapt
         }else{
             /*
             Special case where person is in Days firestore database but not does not have the title
-            of registered nurse which indicated they are probably a lead, removes all their values
-            form the recycler view
+            of registered nurse which indicated they are probably a lead or a nursing assistant,
+            removes all their values form the recycler view
              */
             holder.title.visibility = View.GONE
             holder.hiredate.visibility = View.GONE

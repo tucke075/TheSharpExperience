@@ -41,18 +41,7 @@ class FragDisplayActivity : AppCompatActivity() {
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        setUpDrawer()
-        //set onclick listener for items in the drawer navigation view (nav_view in frag_activity xml
-        /*navView.setNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.hireDate -> {
-                    startActivity(Intent(applicationContext, SettingsActivity::class.java))
-                    true
-                }
-                else -> false
-            }
-        }*/
-
+        setUpDrawer()//personalizes the navigation drawer for the current user
 
         changeFragment(dayRN)
         findViewById<BottomNavigationView>(R.id.bot_nav).setOnItemSelectedListener { item ->
@@ -100,26 +89,43 @@ class FragDisplayActivity : AppCompatActivity() {
         val navigationView: NavigationView = findViewById(R.id.nav_view) // Make sure this is the correct ID for your NavigationView
         val hireDateMenuItem = navigationView.menu.findItem(R.id.hireDate)
         checkLead{isLead ->
-            if(!isLead)
-                hireDateMenuItem.isVisible=false
+            if(!isLead) { //case where we want to hide hireDate menu item for the general user
+                hireDateMenuItem.isVisible = false //makes it invisible if youre not a lead
+                navigationView.setNavigationItemSelectedListener { menuItem ->
+                    when (menuItem.itemId) {
+                        //handling all item calls
+                        R.id.title -> {
+                            true // Indicate that the click event has been handled
+                        }
+                        R.id.viewProfile -> {
 
+                        }
+                        R.id.signout -> {
+                            logout()
+                        }
+                    }
+                    true // Close drawer when an item is clicked
+                }
+            }else{ //case where a person with access has logged in and has access to hireDate menu item
+                navigationView.setNavigationItemSelectedListener { menuItem ->
+                    when (menuItem.itemId) {
+                        //handling all item calls
+                        R.id.hireDate -> {
 
-        }
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.hireDate -> {
-                    checkLead { isLead ->
-                        if (isLead) {
-                            // Perform action for hire date item
-                        } else {
-                            Toast.makeText(this, "Access Denied", Toast.LENGTH_SHORT).show()
-                            menuItem.isVisible = false
+                                }
+                        R.id.title -> {
+
+                        }
+                        R.id.viewProfile ->{
+
+                        }
+                        R.id.signout -> {
+                            logout()
+                            true
                         }
                     }
                     true // Indicate that the click event has been handled
-                }
-                // Handle other menu items here
-                // ...
+                 }
             }
             true // Close drawer when an item is clicked
         }
@@ -139,6 +145,7 @@ class FragDisplayActivity : AppCompatActivity() {
 
     private fun checkLead(callback: (Boolean) -> Unit) {
         var lead: Int = -1
+
         //checking firebase authentication associated with login
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) //user exists
@@ -154,6 +161,10 @@ class FragDisplayActivity : AppCompatActivity() {
                                 lead = document.data["nurseType"]?.toString()?.toIntOrNull() ?: -1
                             }
                         }
+                        /*
+                        needs callback function since fetch from database could take some time
+                        and make sure lead value represents the correct value
+                         */
                         callback(lead == 2)
                     } else {
                         callback(false)
