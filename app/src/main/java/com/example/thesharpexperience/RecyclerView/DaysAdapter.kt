@@ -21,15 +21,23 @@ class DaysAdapter (private val dataList: List<days_person>) : RecyclerView.Adapt
         val person = dataList[position]
         Log.d("Here", "Here")
         if(person.title == 1) {
+            /*
+            General case to make sure everyone display on this recycler view is a registered nurse,
+            displayed their title, hiredate and name
+             */
             holder.title.text = "Registered Nurse"
             holder.hiredate.text = person.hireDate
             holder.name.text = person.name
+        }else{
+            /*
+            Special case where person is in Days firestore database but not does not have the title
+            of registered nurse which indicated they are probably a lead or a nursing assistant,
+            removes all their values form the recycler view
+             */
+            holder.title.visibility = View.GONE
+            holder.hiredate.visibility = View.GONE
+            holder.name.visibility = View.GONE
         }
-        //else
-            //holder.title.text = "Nursing Assistant"
-
-        //holder.hiredate.text = person.hireDate
-       // holder.name.text = person.name
     }
 
     override fun getItemCount(): Int {

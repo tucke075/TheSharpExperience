@@ -6,10 +6,14 @@
     </item>
     <item
         android:id="@+id/hireDate"
-        android:title="Hire date">
+        android:title="Update Hire Dates">
     </item>
     <item
         android:id="@+id/viewProfile"
         android:title="View Profile">
+    </item>
+    <item
+        android:id="@+id/signout"
+        android:title="Signout">
     </item>
 </menu>
