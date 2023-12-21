@@ -143,7 +143,14 @@ class FragDisplayActivity : AppCompatActivity() {
         startActivity(Intent(this, MainActivity::class.java))
     }
 
-    private fun checkLead(callback: (Boolean) -> Unit) {
+    /*params -> Called callback that is a lambda function that takes a boolean returning Unit
+                expects a Boolean when called
+                '->' separates the parameter from the return type
+                'Unit' implies nothing meaningful is being returned back, kinda like void
+   PURPOSE ->   HANDLE OPERATIONS ASYNCHRONOUSLY
+                    being firestore data retrieval with a value being returned from retrieval
+     */
+    private fun checkLead(callback: (Boolean)-> Unit  ) {
         var lead: Int = -1
 
         //checking firebase authentication associated with login
